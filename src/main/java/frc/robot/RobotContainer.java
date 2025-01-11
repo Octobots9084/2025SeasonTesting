@@ -38,8 +38,6 @@ import frc.robot.subsystems.vision.Vision;
  */
 public class RobotContainer {
     private SwerveSubsystem swerveSubsystem;
-    // private Vision vision;
-    private AlignVision alignVision;
     
     private final SendableChooser<Command> autoChooser;
 
@@ -53,8 +51,6 @@ public class RobotContainer {
      */
     public RobotContainer() {
         swerveSubsystem = SwerveSubsystem.getInstance();
-        // vision = Vision.getInstance();
-        alignVision = AlignVision.getInstance();
 
         configureBindings();
 
