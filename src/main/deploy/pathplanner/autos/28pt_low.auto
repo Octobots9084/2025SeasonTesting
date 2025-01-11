@@ -51,12 +51,6 @@
           "data": {
             "pathName": "b_to_lowstation"
           }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "lowstation_to_a"
-          }
         }
       ]
     }
