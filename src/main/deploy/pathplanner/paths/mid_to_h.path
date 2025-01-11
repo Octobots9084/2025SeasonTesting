@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.0317567567567565,
-        "y": 6.772128378378378
+        "x": 2.0455236486486488,
+        "y": 6.268158783783783
       },
       "isLocked": false,
       "linkedName": "mid"
@@ -21,7 +21,7 @@
       },
       "prevControl": {
         "x": 6.344087837837837,
-        "y": 5.5863175675675665
+        "y": 6.317567567567567
       },
       "nextControl": null,
       "isLocked": false,
@@ -48,7 +48,7 @@
   "folder": "mid_to_place",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 180.0
+    "rotation": 0.0
   },
   "useDefaultConstraints": true
 }
