@@ -6,6 +6,8 @@ package frc.robot;
 
 import java.util.List;
 
+import com.pathplanner.lib.auto.AutoBuilder;
+
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -38,6 +40,9 @@ public class RobotContainer {
     private SwerveSubsystem swerveSubsystem;
     // private Vision vision;
     private AlignVision alignVision;
+    
+    private final SendableChooser<Command> autoChooser;
+
 
     private CommandJoystick leftJoystick;
     private CommandJoystick rightJoystick;
@@ -52,6 +57,9 @@ public class RobotContainer {
         alignVision = AlignVision.getInstance();
 
         configureBindings();
+
+        autoChooser = AutoBuilder.buildAutoChooser(); // Default auto will be `Commands.none()`
+        SmartDashboard.putData("Auto Mode", autoChooser);
     }
 
     /**
