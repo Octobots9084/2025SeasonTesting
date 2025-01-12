@@ -5,14 +5,10 @@ import java.util.List;
 import org.photonvision.PhotonCamera;
 import org.photonvision.targeting.PhotonPipelineResult;
 
-import com.ctre.phoenix6.CANBus;
 import com.ctre.phoenix6.configs.CANrangeConfiguration;
 import com.ctre.phoenix6.configs.FovParamsConfigs;
 import com.ctre.phoenix6.hardware.CANrange;
-import com.ctre.phoenix6.hardware.core.CoreCANrange;
-
 import edu.wpi.first.math.geometry.Transform3d;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class AlignVision extends SubsystemBase {
@@ -31,11 +27,13 @@ public class AlignVision extends SubsystemBase {
 
     private CANrangeConfiguration configuration;
     private FovParamsConfigs paramsConfigs;
-    private CANrange range;
+    private CANrange rightRange;
+    private CANrange leftRange;
 
     public AlignVision() {
         cam = new PhotonCamera("CamOne");
-        range = new CANrange(10);
+        leftRange = new CANrange(10);
+        rightRange = new CANrange(12);
 
         paramsConfigs = new FovParamsConfigs();
         paramsConfigs.withFOVRangeX(6.75);
@@ -45,7 +43,8 @@ public class AlignVision extends SubsystemBase {
 
         configuration = new CANrangeConfiguration();
         configuration.withFovParams(paramsConfigs);
-        range.getConfigurator().apply(configuration);
+        rightRange.getConfigurator().apply(configuration);
+        leftRange.getConfigurator().apply(configuration);
     }
 
     @Override
@@ -71,7 +70,19 @@ public class AlignVision extends SubsystemBase {
         return camToTarget;
     }
 
-    public double getLidarDistance() {
-        return range.getDistance().getValueAsDouble();
+    public double getRightLidarDistance() {
+        return rightRange.getDistance().getValueAsDouble();
+    }
+
+    public double getLeftLidarDistance() {
+        return leftRange.getDistance().getValueAsDouble();
+    }
+
+    public boolean getRightLidarDetect() {
+        return rightRange.getIsDetected().getValue();
+    }
+
+    public boolean getLeftLidarDetect() {
+        return leftRange.getIsDetected().getValue();
     }
 }
