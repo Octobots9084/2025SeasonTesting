@@ -3,6 +3,7 @@
   "robotLength": 0.95,
   "holonomicMode": true,
   "pathFolders": [
+    "straight",
     "initial_to_collect",
     "initial_to_place",
     "low_to_place",
@@ -15,6 +16,7 @@
     "place_to_top",
     "place_to_topstation",
     "start_to_algea",
+    "testing",
     "top_to_place",
     "topstation_to_place"
   ],
