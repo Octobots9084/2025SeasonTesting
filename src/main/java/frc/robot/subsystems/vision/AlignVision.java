@@ -85,4 +85,8 @@ public class AlignVision extends SubsystemBase {
     public boolean getLeftLidarDetect() {
         return leftRange.getIsDetected().getValue();
     }
+
+    public int getCurrentTag() {
+        return cam.getAllUnreadResults().get(cam.getAllUnreadResults().size() - 1).getTargets().get(0).getFiducialId();
+    }
 }
