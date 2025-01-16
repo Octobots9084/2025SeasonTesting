@@ -24,8 +24,6 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.ShootIfAble;
 import frc.robot.commands.vision.AlignToTarget;
 import frc.robot.subsystems.SwerveSubsystem;
-import frc.robot.subsystems.vision.AlignVision;
-import frc.robot.subsystems.vision.Vision;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -81,7 +79,7 @@ public class RobotContainer {
             return MathUtil.applyDeadband(rightJoystick.getX(), 0.08);
         }));
 
-        buttonsJoystick.button(1).whileTrue(new AlignToTarget());
+        //buttonsJoystick.button(1).whileTrue(new AlignToTarget());
         buttonsJoystick.button(2).onTrue(new InstantCommand(()->{swerveSubsystem.zeroGyro();}));
     }
 }

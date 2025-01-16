@@ -7,43 +7,43 @@
         {
           "type": "path",
           "data": {
-            "pathName": "initial_to_f"
+            "pathName": "initial_to_f_straight"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "f_to_lowstation"
+            "pathName": "f_to_lowstation_straight"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "lowstation_to_d"
+            "pathName": "lowstation_to_d_straight"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "d_to_lowstation"
+            "pathName": "d_to_lowstation_straight"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "lowstation_to_c"
+            "pathName": "lowstation_to_c_straight"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "c_to_lowstation"
+            "pathName": "c_to_lowstation_straight"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "lowstation_to_b"
+            "pathName": "lowstation_to_b_straight"
           }
         }
       ]
