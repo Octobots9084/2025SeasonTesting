@@ -7,43 +7,43 @@
         {
           "type": "path",
           "data": {
-            "pathName": "initial_to_f_2"
+            "pathName": "initial_to_f"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "f_to_lowstation_2"
+            "pathName": "f_to_lowstation"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "lowstation_to_d_2"
+            "pathName": "lowstation_to_d"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "d_to_lowstation_2"
+            "pathName": "d_to_lowstation"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "lowstation_to_c_2"
+            "pathName": "lowstation_to_c"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "c_to_lowstation_2"
+            "pathName": "c_to_lowstation"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "lowstation_to_b_2"
+            "pathName": "lowstation_to_b"
           }
         }
       ]
