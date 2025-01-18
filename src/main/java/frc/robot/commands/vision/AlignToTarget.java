@@ -44,13 +44,13 @@ public class AlignToTarget extends Command {
         try {
             // SmartDashboard.putNumber("Current Tag", alignVision.getCurrentTag());
 
-            if (alignVision.getToTarget() != null && alignVision.getHasTargets()) {
-                speed = pidController.calculate(alignVision.getToTarget().getY(), 0);
-                lidarSpeed = usingLidar ? lidarPIDController.calculate(aveLidarDist, .12) : cameraDepthPIDController.calculate(alignVision.getToTarget().getX(), .4);
+            if (alignVision.getHasTargets()) {
+                speed = pidController.calculate(alignVision.getAlignY(), 0);
+                lidarSpeed = usingLidar ? lidarPIDController.calculate(aveLidarDist, .12) : cameraDepthPIDController.calculate(alignVision.getAlignX(), 0);
                 gyroSpeed = usingLidar ? gyroPIDController.calculate(Math.asin(diffLidarDist / .605), 0) : -gyroPIDController.calculate(swerve.getGyro(), Math.toRadians(-60));
 
-                // SmartDashboard.putNumber("Horizontal Align", alignVision.getToTarget().getY());
-                // SmartDashboard.putNumber("Lidar Difference", (alignVision.getRightLidarDistance() - alignVision.getLeftLidarDistance()));
+                SmartDashboard.putNumber("Horizontal Align", alignVision.getAlignY());
+                SmartDashboard.putNumber("Depth", alignVision.getAlignX());
             } else {
                 speed = 0;
                 lidarSpeed = 0;

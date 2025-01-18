@@ -74,16 +74,12 @@ public class AlignVision extends SubsystemBase {
                     hasTargets = true;
                     // this.camToTarget = target.getBestCameraToTarget().toMatrix();
                     Gct = target.getBestCameraToTarget().toMatrix();
-                    transformOC = new Transform3d(0, 0, 0, new Rotation3d(0, 0, Math.toRadians(-35.0)));
+                    transformOC = new Transform3d(0.1524, 0.3556, 0, new Rotation3d(0, 0, Math.toRadians(-35.0)));
                     Goc = transformOC.toMatrix();
-                    rt = new Matrix<>(Nat.N4(), Nat.N1(), new double[]{0.0, 0, 0, 1});
+                    rt = new Matrix<>(Nat.N4(), Nat.N1(), new double[]{0.381, 0.1524, 0, 1});
                     ro = Goc.times(Gct.times(rt));
-
-
-                    SmartDashboard.putNumberArray("ro", ro.getData());
-
                 } else {
-                    camToTarget = new Transform3d(0, 0, 0, new Rotation3d(0, 0, 0));
+                    ro = null;
                 }
             }
 		} else {
@@ -93,8 +89,13 @@ public class AlignVision extends SubsystemBase {
 	}
 
 
-    public Transform3d getToTarget() {
-        return camToTarget;
+
+    public double getAlignX() {
+        return ro.getData()[0];
+    }
+
+    public double getAlignY() {
+        return ro.getData()[1];
     }
 
     public double getRightLidarDistance() {
