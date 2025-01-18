@@ -42,7 +42,7 @@ public class AlignToTarget extends Command {
         try {
             if (alignVision.getToTarget() != null) {
                 speed = pidController.calculate(alignVision.getToTarget().getY(), 0);
-                lidarSpeed = usingLidar ? lidarPIDController.calculate(aveLidarDist, .2) : lidarPIDController.calculate(alignVision.getToTarget().getX(), .4);
+                lidarSpeed = usingLidar ? lidarPIDController.calculate(aveLidarDist, .12) : lidarPIDController.calculate(alignVision.getToTarget().getX(), .4);
                 SmartDashboard.putNumber("Horizontal Align", alignVision.getToTarget().getY());
                 SmartDashboard.putNumber("Lidar Difference", (alignVision.getRightLidarDistance() - alignVision.getLeftLidarDistance()));
             } else {

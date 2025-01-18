@@ -1,6 +1,6 @@
 {
   "imu": {
-    "type": "canandgyro",
+    "type": "navx",
     "id": 14,
     "canbus": "null"
   },

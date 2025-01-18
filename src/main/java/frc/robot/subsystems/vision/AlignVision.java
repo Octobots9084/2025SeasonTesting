@@ -55,7 +55,7 @@ public class AlignVision extends SubsystemBase {
 			var result = results.get(results.size() - 1);
 
             for (var target : result.getTargets()) {
-                if (target.getFiducialId() == 6) {
+                if (target.getFiducialId() == 7) {
                     this.camToTarget = target.getBestCameraToTarget();
                 } else {
                     camToTarget = new Transform3d();
