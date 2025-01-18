@@ -79,7 +79,7 @@ public class RobotContainer {
             return MathUtil.applyDeadband(rightJoystick.getX(), 0.08);
         }));
 
-        //buttonsJoystick.button(1).whileTrue(new AlignToTarget());
+        buttonsJoystick.button(1).whileTrue(new AlignToTarget());
         buttonsJoystick.button(2).onTrue(new InstantCommand(()->{swerveSubsystem.zeroGyro();}));
     }
 }

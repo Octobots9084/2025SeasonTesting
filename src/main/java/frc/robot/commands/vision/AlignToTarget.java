@@ -16,6 +16,7 @@ public class AlignToTarget extends Command {
     private double gyroSpeed;
     private PIDController pidController;
     private PIDController lidarPIDController;
+    private PIDController cameraDepthPIDController;
     private PIDController gyroPIDController;
     private double aveLidarDist;
     private double diffLidarDist;
@@ -27,6 +28,7 @@ public class AlignToTarget extends Command {
         this.swerve = SwerveSubsystem.getInstance();
         this.pidController = new PIDController(2,0,0);
         this.lidarPIDController = new PIDController(2,0,0);
+        this.cameraDepthPIDController = new PIDController(1,0,0);
         this.gyroPIDController = new PIDController(4,0,0);
         this.gyroPIDController.enableContinuousInput(0, 2*Math.PI);
         SmartDashboard.putNumber("Set P", 1);
@@ -40,11 +42,13 @@ public class AlignToTarget extends Command {
         diffLidarDist = alignVision.getRightLidarDistance() - alignVision.getLeftLidarDistance();
 
         try {
-            if (alignVision.getToTarget() != null) {
+            // SmartDashboard.putNumber("Current Tag", alignVision.getCurrentTag());
+
+            if (alignVision.getToTarget() != null && alignVision.getHasTargets()) {
                 speed = pidController.calculate(alignVision.getToTarget().getY(), 0);
-                lidarSpeed = usingLidar ? lidarPIDController.calculate(aveLidarDist, .12) : lidarPIDController.calculate(alignVision.getToTarget().getX(), .4);
-                SmartDashboard.putNumber("Horizontal Align", alignVision.getToTarget().getY());
-                SmartDashboard.putNumber("Lidar Difference", (alignVision.getRightLidarDistance() - alignVision.getLeftLidarDistance()));
+                lidarSpeed = usingLidar ? lidarPIDController.calculate(aveLidarDist, .12) : cameraDepthPIDController.calculate(alignVision.getToTarget().getX(), .4);
+                // SmartDashboard.putNumber("Horizontal Align", alignVision.getToTarget().getY());
+                // SmartDashboard.putNumber("Lidar Difference", (alignVision.getRightLidarDistance() - alignVision.getLeftLidarDistance()));
             } else {
                 speed = 0;
             }
@@ -56,7 +60,7 @@ public class AlignToTarget extends Command {
 
         SmartDashboard.putBoolean("BothLidarGood", usingLidar);
         
-        gyroSpeed = usingLidar ? gyroPIDController.calculate(Math.asin(diffLidarDist / .605), 0) : -gyroPIDController.calculate(swerve.getGyro(), 2*Math.PI);
+        gyroSpeed = usingLidar ? gyroPIDController.calculate(Math.asin(diffLidarDist / .605), 0) : -gyroPIDController.calculate(swerve.getGyro(), Math.toRadians(-60));
        
         SmartDashboard.putNumber("LidarAngle", Math.asin(diffLidarDist / .605));
         SmartDashboard.putNumber("Gyro pos", swerve.getGyro());
