@@ -3,9 +3,7 @@
   "robotLength": 0.94,
   "holonomicMode": true,
   "pathFolders": [
-    "28pt_curved_paths",
-    "28pt_straight_WORKS_paths",
-    "push_paths",
+    "28pt_paths",
     "initial_to_collect",
     "initial_to_place",
     "low_to_place",
@@ -17,6 +15,7 @@
     "place_to_processor",
     "place_to_top",
     "place_to_topstation",
+    "push_paths",
     "start_to_algea",
     "top_to_place",
     "topstation_to_place"

@@ -45,7 +45,7 @@
     "rotation": 55.0
   },
   "reversed": false,
-  "folder": "28pt_straight_WORKS_paths",
+  "folder": "28pt_paths",
   "idealStartingState": {
     "velocity": 0,
     "rotation": 119.99999999999999
