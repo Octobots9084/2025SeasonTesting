@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import com.pathplanner.lib.config.PIDConstants;
+
 import edu.wpi.first.apriltag.AprilTagFieldLayout;
 import edu.wpi.first.apriltag.AprilTagFields;
 import edu.wpi.first.math.Matrix;
@@ -35,8 +37,10 @@ public final class Constants {
     public static final Translation2d blModuleOffset = new Translation2d(-0.64135 / 2.0, 0.64135 / 2.0);
     public static final Translation2d brModuleOffset = new Translation2d(-0.64135 / 2.0, -0.64135 / 2.0);
 
-    public static final double maxModuleSpeed = 4.5; // M/S
+    public static final double maxModuleSpeed = 47; // M/S
 
+    public static final PIDConstants translationConstants = new PIDConstants(5, 0.0, 0.0);
+    public static final PIDConstants rotationConstants = new PIDConstants(5, 0.0, 0.0);
   }
 
   public static class VisionConstants {
