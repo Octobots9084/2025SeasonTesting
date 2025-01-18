@@ -28,7 +28,7 @@ public class AlignToTarget extends Command {
         this.swerve = SwerveSubsystem.getInstance();
         this.pidController = new PIDController(2,0,0);
         this.lidarPIDController = new PIDController(2,0,0);
-        this.cameraDepthPIDController = new PIDController(1,0,0);
+        this.cameraDepthPIDController = new PIDController(1.25,0,0);
         this.gyroPIDController = new PIDController(4,0,0);
         this.gyroPIDController.enableContinuousInput(0, 2*Math.PI);
         SmartDashboard.putNumber("Set P", 1);
@@ -47,21 +47,24 @@ public class AlignToTarget extends Command {
             if (alignVision.getToTarget() != null && alignVision.getHasTargets()) {
                 speed = pidController.calculate(alignVision.getToTarget().getY(), 0);
                 lidarSpeed = usingLidar ? lidarPIDController.calculate(aveLidarDist, .12) : cameraDepthPIDController.calculate(alignVision.getToTarget().getX(), .4);
+                gyroSpeed = usingLidar ? gyroPIDController.calculate(Math.asin(diffLidarDist / .605), 0) : -gyroPIDController.calculate(swerve.getGyro(), Math.toRadians(-60));
+
                 // SmartDashboard.putNumber("Horizontal Align", alignVision.getToTarget().getY());
                 // SmartDashboard.putNumber("Lidar Difference", (alignVision.getRightLidarDistance() - alignVision.getLeftLidarDistance()));
             } else {
                 speed = 0;
+                lidarSpeed = 0;
+                gyroSpeed = 0;
             }
         } catch (Exception e) {
             speed = 0;
+            lidarSpeed = 0;
+            gyroSpeed = 0;
         }
 
         SmartDashboard.putNumber("Average Lidar Depth", aveLidarDist);
 
-        SmartDashboard.putBoolean("BothLidarGood", usingLidar);
-        
-        gyroSpeed = usingLidar ? gyroPIDController.calculate(Math.asin(diffLidarDist / .605), 0) : -gyroPIDController.calculate(swerve.getGyro(), Math.toRadians(-60));
-       
+        SmartDashboard.putBoolean("BothLidarGood", usingLidar);       
         SmartDashboard.putNumber("LidarAngle", Math.asin(diffLidarDist / .605));
         SmartDashboard.putNumber("Gyro pos", swerve.getGyro());
 

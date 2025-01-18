@@ -3,12 +3,20 @@ package frc.robot.subsystems.vision;
 import java.util.List;
 
 import org.photonvision.PhotonCamera;
+import org.photonvision.PhotonPoseEstimator;
 import org.photonvision.targeting.PhotonPipelineResult;
 
 import com.ctre.phoenix6.configs.CANrangeConfiguration;
 import com.ctre.phoenix6.configs.FovParamsConfigs;
 import com.ctre.phoenix6.hardware.CANrange;
+
+import edu.wpi.first.math.Matrix;
+import edu.wpi.first.math.Nat;
+import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Transform3d;
+import edu.wpi.first.math.numbers.N1;
+import edu.wpi.first.math.numbers.N4;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class AlignVision extends SubsystemBase {
@@ -29,6 +37,12 @@ public class AlignVision extends SubsystemBase {
     private FovParamsConfigs paramsConfigs;
     private CANrange rightRange;
     private CANrange leftRange;
+    private boolean hasTargets;
+    private Matrix<N4, N4> Gct;
+    private Matrix<N4, N4> Goc;
+    private Matrix<N4, N1> rt;
+    private Matrix<N4, N1> ro;
+    private Transform3d transformOC;
 
     public AlignVision() {
         cam = new PhotonCamera("CamOne");
@@ -50,18 +64,31 @@ public class AlignVision extends SubsystemBase {
     @Override
 	public void periodic() {
 		List<PhotonPipelineResult> results = cam.getAllUnreadResults();
+        // cam.getAllUnreadResults().get(0).getBestTarget().bestCameraToTarget()
 
 		if (!results.isEmpty()) {
 			var result = results.get(results.size() - 1);
 
             for (var target : result.getTargets()) {
-                if (target.getFiducialId() == 7) {
-                    this.camToTarget = target.getBestCameraToTarget();
+                if (target.getFiducialId() == 16) {
+                    hasTargets = true;
+                    // this.camToTarget = target.getBestCameraToTarget().toMatrix();
+                    Gct = target.getBestCameraToTarget().toMatrix();
+                    transformOC = new Transform3d(0, 0, 0, new Rotation3d(0, 0, Math.toRadians(-35.0)));
+                    Goc = transformOC.toMatrix();
+                    rt = new Matrix<>(Nat.N4(), Nat.N1(), new double[]{0.0, 0, 0, 1});
+                    ro = Goc.times(Gct.times(rt));
+
+
+                    SmartDashboard.putNumberArray("ro", ro.getData());
+
                 } else {
-                    camToTarget = new Transform3d();
+                    camToTarget = new Transform3d(0, 0, 0, new Rotation3d(0, 0, 0));
                 }
             }
-		}
+		} else {
+            hasTargets = false;
+        }
 
 	}
 
@@ -86,7 +113,7 @@ public class AlignVision extends SubsystemBase {
         return leftRange.getIsDetected().getValue();
     }
 
-    public int getCurrentTag() {
-        return cam.getAllUnreadResults().get(cam.getAllUnreadResults().size() - 1).getTargets().get(0).getFiducialId();
+    public boolean getHasTargets() {
+        return hasTargets;
     }
 }
