@@ -3,8 +3,9 @@
   "robotLength": 0.94,
   "holonomicMode": true,
   "pathFolders": [
-    "28pt_straight_WORKS_paths",
     "28pt_curved_paths",
+    "28pt_straight_WORKS_paths",
+    "push_paths",
     "initial_to_collect",
     "initial_to_place",
     "low_to_place",
@@ -21,8 +22,8 @@
     "topstation_to_place"
   ],
   "autoFolders": [],
-  "defaultMaxVel": 8.0,
-  "defaultMaxAccel": 6.0,
+  "defaultMaxVel": 4.0,
+  "defaultMaxAccel": 3.0,
   "defaultMaxAngVel": 540.0,
   "defaultMaxAngAccel": 720.0,
   "defaultNominalVoltage": 10.0,

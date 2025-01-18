@@ -41,7 +41,7 @@ import swervelib.telemetry.SwerveDriveTelemetry.TelemetryVerbosity;
  * Basic simulation of a swerve subsystem with the methods needed by PathPlanner
  */
 public class SwerveSubsystem extends SubsystemBase {
-  double maximumSpeed = 8;
+  double maximumSpeed = 4;
   File swerveJsonDirectory = new File(Filesystem.getDeployDirectory(), "swerve");
   SwerveDrive swerveDrive;
   private Field2d field = new Field2d();
