@@ -6,6 +6,8 @@ package frc.robot;
 
 import java.util.List;
 
+import com.pathplanner.lib.auto.AutoBuilder;
+
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -22,8 +24,6 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.ShootIfAble;
 import frc.robot.commands.vision.AlignToTarget;
 import frc.robot.subsystems.SwerveSubsystem;
-import frc.robot.subsystems.vision.AlignVision;
-import frc.robot.subsystems.vision.Vision;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -36,8 +36,9 @@ import frc.robot.subsystems.vision.Vision;
  */
 public class RobotContainer {
     private SwerveSubsystem swerveSubsystem;
-    // private Vision vision;
-    private AlignVision alignVision;
+    
+    private final SendableChooser<Command> autoChooser;
+
 
     private CommandJoystick leftJoystick;
     private CommandJoystick rightJoystick;
@@ -48,10 +49,11 @@ public class RobotContainer {
      */
     public RobotContainer() {
         swerveSubsystem = SwerveSubsystem.getInstance();
-        // vision = Vision.getInstance();
-        alignVision = AlignVision.getInstance();
 
         configureBindings();
+
+        autoChooser = AutoBuilder.buildAutoChooser(); // Default auto will be `Commands.none()`
+        SmartDashboard.putData("Auto Mode", autoChooser);
     }
 
     /**
@@ -60,7 +62,7 @@ public class RobotContainer {
      * @return the command to run in autonomous
      */
     public Command getAutonomousCommand() {
-        return null;
+        return autoChooser.getSelected();
     }
 
     public void configureBindings() {
@@ -77,7 +79,7 @@ public class RobotContainer {
             return MathUtil.applyDeadband(rightJoystick.getX(), 0.08);
         }));
 
-        buttonsJoystick.button(1).whileTrue(new AlignToTarget());
+        //buttonsJoystick.button(1).whileTrue(new AlignToTarget());
         buttonsJoystick.button(2).onTrue(new InstantCommand(()->{swerveSubsystem.zeroGyro();}));
     }
 }
