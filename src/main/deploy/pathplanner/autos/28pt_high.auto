@@ -7,43 +7,43 @@
         {
           "type": "path",
           "data": {
-            "pathName": "initial_to_f"
+            "pathName": "initial_to_j"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "f_to_lowstation"
+            "pathName": "j_to_topstation"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "lowstation_to_d"
+            "pathName": "topstation_to_k"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "d_to_lowstation"
+            "pathName": "k_to_topstation"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "lowstation_to_c"
+            "pathName": "topstation_to_l"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "c_to_lowstation"
+            "pathName": "l_to_topstation"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "lowstation_to_b"
+            "pathName": "topstation_to_a"
           }
         }
       ]
