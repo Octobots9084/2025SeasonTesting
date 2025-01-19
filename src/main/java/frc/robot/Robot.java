@@ -34,9 +34,6 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     // System.out.println(configuration.toString());
-    SmartDashboard.putNumber("Gyro", SwerveSubsystem.getInstance().getGyro());
-    SmartDashboard.putNumber("AnglePos", SwerveSubsystem.getInstance().getModuleStates()[0].angle.getDegrees());
-    SmartDashboard.putNumber("Speed", SwerveSubsystem.getInstance().getModuleStates()[0].speedMetersPerSecond);
 
     CommandScheduler.getInstance().run();
   }

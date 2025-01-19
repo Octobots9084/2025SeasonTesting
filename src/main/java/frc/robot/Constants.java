@@ -9,6 +9,7 @@ import com.pathplanner.lib.config.PIDConstants;
 import edu.wpi.first.apriltag.AprilTagFieldLayout;
 import edu.wpi.first.apriltag.AprilTagFields;
 import edu.wpi.first.math.Matrix;
+import edu.wpi.first.math.Nat;
 import edu.wpi.first.math.VecBuilder;
 import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Transform3d;
@@ -16,6 +17,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.geometry.Translation3d;
 import edu.wpi.first.math.numbers.N1;
 import edu.wpi.first.math.numbers.N3;
+import edu.wpi.first.math.numbers.N4;
 import edu.wpi.first.math.util.Units;
 
 /**
@@ -45,6 +47,15 @@ public final class Constants {
 
   public static class VisionConstants {
     public final static boolean USE_VISION = true;
+
+    // Transform Camera Coordinates to Robot Coordinates. Based on camera mounting position.
+    public static final Matrix<N4, N4> transformFrontLeftToRobot = new Transform3d(0.1524, 0.3556, 0, new Rotation3d(0, 0, Math.toRadians(-35.0))).toMatrix();
+    
+    
+    // Position of the AprilTag in Tag Coordinates.
+    public static final Matrix<N4, N1> referenceTagPosition = new Matrix<>(Nat.N4(), Nat.N1(), new double[]{0, 0, 0, 1});
+
+
 
     // public static final Transform3d ROBOT_TO_PINKY = new Transform3d(
     //     new Translation3d(-.32, 0.28, 0.35),
